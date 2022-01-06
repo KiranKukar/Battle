@@ -6,15 +6,25 @@ class Battle < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  enable :sessions
+
   # routes go here
   get '/' do
+    "player1 = " << session[:player1].inspect
+    "player2 = " << session[:player2].inspect
     erb(:index)
   end
 
-  post '/names' do
-    @player1 = params[:player1]
-    @player2 = params[:player2]
+  get '/play' do
+    @player1 = session['player1']
+    @player2 = session['player2']
     erb(:play)
+  end
+
+  post '/names' do
+    session['player1'] = params['player1']
+    session['player2'] = params['player2']
+    redirect '/play'
   end
 
   #do not change
