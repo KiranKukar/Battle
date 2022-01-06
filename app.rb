@@ -8,7 +8,7 @@ class Battle < Sinatra::Base
 
   # routes go here
   get '/' do
-    "Hello Battle!"
+    "Testing infrastructure working!"
   end
 
   #do not change

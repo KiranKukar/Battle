@@ -98,3 +98,15 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+ #Require your Sinatra app file, capybara, capybara/rspec and rspec.
+ #Tell Capybara about your app class using Capybara.app
+
+ENV['RACK_ENV'] = 'test'
+require File.join(File.dirname(__FILE__), '..', 'app.rb')
+
+require 'capybara'
+require 'capybara/rspec'
+require 'rspec'
+
+Capybara.app = Battle
