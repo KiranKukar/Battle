@@ -1,8 +1,8 @@
 
-<h1> Player 1 name: <%= @player1 %></h1>
-<h1> Player 1 hit points: <%= @hit_points1 %></h1>
-<h1> Player 2 name: <%= @player2 %></h1>
-<h1> Player 2 hit points: <%= @hit_points2 %></h1>
+<h1> Player 1 name: <%= @game.player1.name %></h1>
+<h1> Player 1 hit points: <%= @game.player1.hit_points %></h1>
+<h1> Player 2 name: <%= @game.player2.name %></h1>
+<h1> Player 2 hit points: <%= @game.player2.hit_points %></h1>
 
 <form action='/attack'>
 <input type='submit' value='Attack player'>

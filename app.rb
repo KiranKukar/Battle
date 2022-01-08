@@ -1,38 +1,39 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
+require './lib/player'
+require './lib/game'
 
 class Battle < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
+    also_reload 'lib/player'
+    also_reload './lib/game'
   end
 
   enable :sessions
 
   # routes go here
+
+  post '/names' do
+    player1 = Player.new(params['player1'])
+    player2 = Player.new(params['player2'])
+    $game = Game.new(player1, player2)
+    redirect '/play'
+  end
+
   get '/' do
-    "player1 = " << session[:player1].inspect
-    "player2 = " << session[:player2].inspect
     erb(:index)
   end
 
   get '/attack' do
-    @player1 = $player_1.name
-    @player2 = $player_2.name
+    @game = $game
+    @game.attack(@game.player2)
     erb(:attack)
   end
 
   get '/play' do
-    @player1 = $player_1.name
-    @player2 = $player_2.name
-    @hit_points1 = 60
-    @hit_points2 = 60
+    @game = $game
     erb(:play)
-  end
-
-  post '/names' do
-    $player_1 = Player.new(params['player1'])
-    $player_2 = Player.new(params['player2'])
-    redirect '/play'
   end
 
   #do not change
